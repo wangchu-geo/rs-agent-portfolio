@@ -26,7 +26,18 @@
 | PM10(2.5) 反演 | ![PM10](portfolio/figures/doc_pm10_example.png) ![PM2.5](portfolio/figures/doc_pm25_example.png) | 34 项断言 | RF 预测列序、AOD 双倍缩放、命名交叉 |
 | 水体总磷 | ![总磷](portfolio/figures/doc_tp_example.png) | 103 项断言 | 掩膜坏值入模、阈值 0、÷0 语义、模型未落盘等 6 项 |
 
-图注：成果图摘自本人产品手册原图（原产品链产物）。
+图注：成果图摘自本人产品手册原图（原产品链产物）；对比与联合分析图为工具链直接输出（未做后期修饰）。
+
+## 多时相对比与联合分析成果
+
+跨年同季节对照（同一研究区），对应 `compare_ndvi_dates`、
+LST 对比与 LST-NDVI 联合分析工具的真实运行产物：
+
+| 产品 | 对比/分析图 | 说明 |
+|---|---|---|
+| NDVI 变化对比 | ![NDVI 变化图](portfolio/figures/change_map_20250425_vs_20260510.png) ![NDVI 面积占比](portfolio/figures/area_proportion_20250425_vs_20260510.png) | 20250425 → 20260510：Δ=晚-早 分类（改善/稳定/退化/无效）与各类面积占比 |
+| LST 变化对比 | ![LST 变化图](portfolio/figures/lst_change_map_20241231_vs_20251226.png) ![LST 面积占比](portfolio/figures/lst_area_proportion_20241231_vs_20251226.png) | 20241231 → 20251226：ΔLST 变化分类与各类面积占比 |
+| LST-NDVI 联合分析 | ![联合 2025](portfolio/figures/lst_ndvi_scatter_20250430_20250425.png) ![联合 2026](portfolio/figures/lst_ndvi_scatter_20260425_20260510.png) | 近似同期 LST-NDVI 散点与相关性，两年对照看关系年际稳定性 |
 
 ## PM10(2.5) 反演验证结果
 
@@ -93,7 +104,7 @@ rs-agent-portfolio/
 │   ├── verify_pw_tools.py    # 验证（V-PW1~V-PW14）
 │   └── graphs/               # SNAP 图资产
 └── portfolio/                # 成果图件
-    └── figures/              # 成果图与流程图
+    └── figures/              # 成果图、对比分析与流程图
 ```
 
 ## 环境
