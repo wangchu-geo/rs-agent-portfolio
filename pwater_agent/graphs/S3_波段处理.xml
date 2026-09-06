@@ -1,0 +1,529 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>$input</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,4865,4091</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa01_radiance</name>
+          <type>float32</type>
+          <expression>Oa01_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(2)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa02_radiance</name>
+          <type>float32</type>
+          <expression>Oa02_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(3)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa03_radiance</name>
+          <type>float32</type>
+          <expression>Oa03_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMerge">
+    <operator>BandMerge</operator>
+    <sources>
+      <sourceProduct refid="BandMaths"/>
+      <sourceProduct.1 refid="BandMaths(2)"/>
+      <sourceProduct.2 refid="BandMaths(3)"/>
+      <sourceProduct.3 refid="BandMaths(4)"/>
+      <sourceProduct.4 refid="BandMaths(5)"/>
+      <sourceProduct.5 refid="BandMaths(6)"/>
+      <sourceProduct.6 refid="BandMaths(7)"/>
+      <sourceProduct.7 refid="BandMaths(8)"/>
+      <sourceProduct.8 refid="BandMaths(9)"/>
+      <sourceProduct.9 refid="BandMaths(10)"/>
+      <sourceProduct.10 refid="BandMaths(11)"/>
+      <sourceProduct.11 refid="BandMaths(12)"/>
+      <sourceProduct.12 refid="BandMaths(13)"/>
+      <sourceProduct.13 refid="BandMaths(14)"/>
+      <sourceProduct.14 refid="BandMaths(15)"/>
+      <sourceProduct.15 refid="BandMaths(16)"/>
+      <sourceProduct.16 refid="BandMaths(17)"/>
+      <sourceProduct.17 refid="BandMaths(18)"/>
+      <sourceProduct.18 refid="BandMaths(19)"/>
+      <sourceProduct.19 refid="BandMaths(20)"/>
+      <sourceProduct.20 refid="BandMaths(21)"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <geographicError>1.0E-5</geographicError>
+    </parameters>
+  </node>
+  <node id="BandMaths(4)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa04_radiance</name>
+          <type>float32</type>
+          <expression>Oa04_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(5)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa05_radiance</name>
+          <type>float32</type>
+          <expression>Oa05_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(6)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa06_radiance</name>
+          <type>float32</type>
+          <expression>Oa06_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(7)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa07_radiance</name>
+          <type>float32</type>
+          <expression>Oa07_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(8)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa08_radiance</name>
+          <type>float32</type>
+          <expression>Oa08_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(9)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa09_radiance</name>
+          <type>float32</type>
+          <expression>Oa09_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(10)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa10_radiance</name>
+          <type>float32</type>
+          <expression>Oa10_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(11)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa11_radiance</name>
+          <type>float32</type>
+          <expression>Oa11_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(12)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa12_radiance</name>
+          <type>float32</type>
+          <expression>Oa12_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(13)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa13_radiance</name>
+          <type>float32</type>
+          <expression>Oa13_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(14)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa14_radiance</name>
+          <type>float32</type>
+          <expression>Oa14_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(15)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa15_radiance</name>
+          <type>float32</type>
+          <expression>Oa15_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(16)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa16_radiance</name>
+          <type>float32</type>
+          <expression>Oa16_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(17)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa17_radiance</name>
+          <type>float32</type>
+          <expression>Oa17_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(18)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa18_radiance</name>
+          <type>float32</type>
+          <expression>Oa18_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(19)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa19_radiance</name>
+          <type>float32</type>
+          <expression>Oa19_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(20)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa20_radiance</name>
+          <type>float32</type>
+          <expression>Oa20_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(21)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Oa21_radiance</name>
+          <type>float32</type>
+          <expression>Oa21_radiance</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="BandMerge"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$output</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+            <displayPosition x="16.0" y="130.0"/>
+    </node>
+    <node id="BandMaths">
+      <displayPosition x="223.0" y="11.0"/>
+    </node>
+    <node id="BandMaths(2)">
+      <displayPosition x="215.0" y="46.0"/>
+    </node>
+    <node id="BandMaths(3)">
+      <displayPosition x="212.0" y="78.0"/>
+    </node>
+    <node id="BandMerge">
+      <displayPosition x="388.0" y="115.0"/>
+    </node>
+    <node id="BandMaths(4)">
+      <displayPosition x="216.0" y="113.0"/>
+    </node>
+    <node id="BandMaths(5)">
+      <displayPosition x="213.0" y="140.0"/>
+    </node>
+    <node id="BandMaths(6)">
+      <displayPosition x="213.0" y="170.0"/>
+    </node>
+    <node id="BandMaths(7)">
+      <displayPosition x="212.0" y="200.0"/>
+    </node>
+    <node id="BandMaths(8)">
+      <displayPosition x="214.0" y="228.0"/>
+    </node>
+    <node id="BandMaths(9)">
+      <displayPosition x="214.0" y="256.0"/>
+    </node>
+    <node id="BandMaths(10)">
+      <displayPosition x="212.0" y="284.0"/>
+    </node>
+    <node id="BandMaths(11)">
+      <displayPosition x="214.0" y="317.0"/>
+    </node>
+    <node id="BandMaths(12)">
+      <displayPosition x="209.0" y="349.0"/>
+    </node>
+    <node id="BandMaths(13)">
+      <displayPosition x="208.0" y="383.0"/>
+    </node>
+    <node id="BandMaths(14)">
+      <displayPosition x="207.0" y="414.0"/>
+    </node>
+    <node id="BandMaths(15)">
+      <displayPosition x="203.0" y="444.0"/>
+    </node>
+    <node id="BandMaths(16)">
+      <displayPosition x="428.0" y="207.0"/>
+    </node>
+    <node id="BandMaths(17)">
+      <displayPosition x="398.0" y="253.0"/>
+    </node>
+    <node id="BandMaths(18)">
+      <displayPosition x="371.0" y="293.0"/>
+    </node>
+    <node id="BandMaths(19)">
+      <displayPosition x="330.0" y="334.0"/>
+    </node>
+    <node id="BandMaths(20)">
+      <displayPosition x="328.0" y="384.0"/>
+    </node>
+    <node id="BandMaths(21)">
+      <displayPosition x="327.0" y="419.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="577.0" y="126.0"/>
+    </node>
+  </applicationData>
+</graph>

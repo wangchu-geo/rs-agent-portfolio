@@ -1,0 +1,315 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NDVI</name>
+          <type>float32</type>
+          <expression>(B8 - B4) /  (B8 + B4)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(2)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NDMI</name>
+          <type>float32</type>
+          <expression>(B8A - B11) /  (B8A + B11)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(3)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>RVI</name>
+          <type>float32</type>
+          <expression>B8 / B4</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(4)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NDII</name>
+          <type>float32</type>
+          <expression>(B8 - B11) /  (B8 + B11)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(5)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>MSI</name>
+          <type>float32</type>
+          <expression>B12 / B8</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(6)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>WBI</name>
+          <type>float32</type>
+          <expression>B8A / B9</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(7)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>FVI</name>
+          <type>float32</type>
+          <expression>(2 * B8 - B4 - B11) /  (2 * B8 + B4 + B11)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMerge">
+    <operator>BandMerge</operator>
+    <sources>
+      <sourceProduct refid="BandMaths"/>
+      <sourceProduct.1 refid="BandMaths(2)"/>
+      <sourceProduct.2 refid="BandMaths(3)"/>
+      <sourceProduct.3 refid="BandMaths(4)"/>
+      <sourceProduct.4 refid="BandMaths(5)"/>
+      <sourceProduct.5 refid="BandMaths(6)"/>
+      <sourceProduct.6 refid="BandMaths(7)"/>
+      <sourceProduct.7 refid="BandMaths(8)"/>
+      <sourceProduct.8 refid="BandMaths(9)"/>
+      <sourceProduct.9 refid="BandMaths(11)"/>
+      <sourceProduct.10 refid="BandMaths(10)"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <geographicError>1.0E-5</geographicError>
+    </parameters>
+  </node>
+  <node id="BandMaths(8)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Red</name>
+          <type>float32</type>
+          <expression>B4</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(9)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NIR</name>
+          <type>float32</type>
+          <expression>B8</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(10)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Swir1</name>
+          <type>float32</type>
+          <expression>B11</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(11)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="S2Resampling"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Swir2</name>
+          <type>float32</type>
+          <expression>B12</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="S2Resampling">
+    <operator>S2Resampling</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <resolution>20</resolution>
+      <upsampling>Bilinear</upsampling>
+      <downsampling>Mean</downsampling>
+      <flagDownsampling>First</flagDownsampling>
+      <resampleOnPyramidLevels>true</resampleOnPyramidLevels>
+    </parameters>
+  </node>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>$input</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,10980,10980</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="BandMerge"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$output</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="BandMaths">
+      <displayPosition x="318.0" y="67.0"/>
+    </node>
+    <node id="BandMaths(2)">
+      <displayPosition x="313.0" y="112.0"/>
+    </node>
+    <node id="BandMaths(3)">
+      <displayPosition x="316.0" y="158.0"/>
+    </node>
+    <node id="BandMaths(4)">
+      <displayPosition x="319.0" y="207.0"/>
+    </node>
+    <node id="BandMaths(5)">
+      <displayPosition x="318.0" y="249.0"/>
+    </node>
+    <node id="BandMaths(6)">
+      <displayPosition x="317.0" y="297.0"/>
+    </node>
+    <node id="BandMaths(7)">
+      <displayPosition x="321.0" y="337.0"/>
+    </node>
+    <node id="BandMerge">
+      <displayPosition x="695.0" y="182.0"/>
+    </node>
+    <node id="BandMaths(8)">
+      <displayPosition x="319.0" y="375.0"/>
+    </node>
+    <node id="BandMaths(9)">
+      <displayPosition x="317.0" y="415.0"/>
+    </node>
+    <node id="BandMaths(10)">
+      <displayPosition x="314.0" y="454.0"/>
+    </node>
+    <node id="BandMaths(11)">
+      <displayPosition x="315.0" y="493.0"/>
+    </node>
+    <node id="S2Resampling">
+      <displayPosition x="131.0" y="223.0"/>
+    </node>
+    <node id="Read">
+      <displayPosition x="-2.0" y="224.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="873.0" y="161.0"/>
+    </node>
+  </applicationData>
+</graph>

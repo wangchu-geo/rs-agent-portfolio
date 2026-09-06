@@ -1,0 +1,18 @@
+# 本地密钥与配置
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.idea/
+.vscode/
+
+# 本地遥感数据与中间产物（体积大，不随仓库发布）
+*.tif
+*.tar
+*.zip
+*.dim
+*.png
+!portfolio/figures/*.png
