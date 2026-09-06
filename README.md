@@ -36,7 +36,7 @@
 |---|---|
 | 土壤相对湿度（Sentinel-1 雷达 + Sentinel-2 光学融合反演） | ![土壤湿度流程](portfolio/figures/doc_soil_flow.png) |
 | 水体总磷（Sentinel-2 + Sentinel-3 随机森林反演） | ![总磷流程](portfolio/figures/doc_tp_flow.png) |
-| PM10/2.5（二维反演 + 三维垂直廓线推算） | ![PM 流程](portfolio/figures/doc_pm_flow.png) |
+| PM10/2.5（二维反演 + 空值填补） | ![PM 流程](portfolio/figures/doc_pm_flow.png) |
 
 ## 工程方法
 
