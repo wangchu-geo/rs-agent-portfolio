@@ -19,8 +19,8 @@
 
 | 产品 | 成果图 | 验证 | 旧品缺陷修复 |
 |---|---|---|---|
-| NDVI 多时相 | ![NDVI](portfolio/figures/doc_ndvi.png) | 23+29+31 项断言 | — |
-| 地表温度 LST（Landsat TIRS，跨年同季节验证） | ![LST](portfolio/figures/doc_lst.png) | 23+17+12 项断言 | —（自研链，含跨年同季节对照） |
+| NDVI 反演（单景） | ![NDVI](portfolio/figures/doc_ndvi.png) | 23+29+31 项断言 | — |
+| 地表温度 LST（Landsat TIRS，单景反演） | ![LST](portfolio/figures/doc_lst.png) | 23+17+12 项断言 | —（自研链） |
 | 森林火点识别 | ![火点](portfolio/figures/doc_fire.png) | 86 项断言 | 量纲 bug |
 | 土壤相对湿度 | ![土壤湿度](portfolio/figures/doc_soil_result.png) | 33+24 项断言 | 特征列错位、无地理重投影、垃圾文件 |
 | PM10(2.5) 反演 | ![PM10](portfolio/figures/doc_pm10_example.png) ![PM2.5](portfolio/figures/doc_pm25_example.png) | 34 项断言 | RF 预测列序、AOD 双倍缩放、命名交叉 |
@@ -37,7 +37,7 @@ LST 对比与 LST-NDVI 联合分析工具的真实运行产物：
 |---|---|---|
 | NDVI 变化对比 | ![NDVI 变化图](portfolio/figures/change_map_20250425_vs_20260510.png) ![NDVI 面积占比](portfolio/figures/area_proportion_20250425_vs_20260510.png) | 20250425 → 20260510：Δ=晚-早 分类（改善/稳定/退化/无效）与各类面积占比 |
 | LST 变化对比 | ![LST 变化图](portfolio/figures/lst_change_map_20241231_vs_20251226.png) ![LST 面积占比](portfolio/figures/lst_area_proportion_20241231_vs_20251226.png) | 20241231 → 20251226：ΔLST 变化分类与各类面积占比 |
-| LST-NDVI 联合分析 | ![联合 2025](portfolio/figures/lst_ndvi_scatter_20250430_20250425.png) ![联合 2026](portfolio/figures/lst_ndvi_scatter_20260425_20260510.png) | 近似同期 LST-NDVI 散点与相关性，两年对照看关系年际稳定性 |
+| LST-NDVI 联合分析 | ![联合 20241231](portfolio/figures/lst_ndvi_scatter_20241231_20241231.png) ![联合 20251226](portfolio/figures/lst_ndvi_scatter_20251226_20251228.png) | 近似同期 LST-NDVI 散点与相关性，两年对照看关系年际稳定性 |
 
 ## PM10(2.5) 反演验证结果
 
