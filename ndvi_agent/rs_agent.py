@@ -75,7 +75,7 @@ LST_TOOLS = [
                 "（K→℃）→ QA_PIXEL 启发式云掩膜（QA<2 或 QA>22000 置 NaN，"
                 "与历史产品口径一致），输出浮点地表温度产品 LST_<日期>.tif（nodata=NaN）。"
                 "一次调用处理该日期全部景，单景约2-4分钟（首次含解压），请耐心等待。"
-                "已存在的产品自动跳过（幂等，可安全重跑）。"
+                "已存在的产品自动跳过（幂等，可安全重跑）；force=true 时无视已存在产品、重新执行反演。"
             ),
             "parameters": {
                 "type": "object",
@@ -92,6 +92,10 @@ LST_TOOLS = [
                     "extract_dir": {
                         "type": "string",
                         "description": "tar解压目录（可选），如 E:/YYR/LST/multi_date/work/20251226/extract；缺省为 output_dir 同级的 extract"
+                    },
+                    "force": {
+                        "type": "boolean",
+                        "description": "true=即使反演产品已存在也重新执行反演（用户明确选择重新跑时传true）；缺省false（幂等跳过）"
                     }
                 },
                 "required": ["scene_paths", "output_dir"]
@@ -106,6 +110,7 @@ LST_TOOLS = [
                 "用研究区矢量裁剪整景LST产品至研究区范围（自动处理坐标系不一致），"
                 "背景置-9999，输出裁剪产品（供统计、对比与联合分析使用）。"
                 "LST 为 30m 分辨率，与 NDVI 的裁剪工具是两套工具，不要混用。"
+                "已存在的裁剪产品自动跳过（幂等）；force=true 时重新裁剪覆盖。"
             ),
             "parameters": {
                 "type": "object",
@@ -121,6 +126,10 @@ LST_TOOLS = [
                     "output_dir": {
                         "type": "string",
                         "description": "裁剪输出目录，如 E:/YYR/LST/multi_date/work/20251226/clip"
+                    },
+                    "force": {
+                        "type": "boolean",
+                        "description": "true=即使裁剪产品已存在也重新裁剪（用户明确选择重新跑时传true）；缺省false（幂等跳过）"
                     }
                 },
                 "required": ["lst_tif", "shp_path", "output_dir"]
@@ -276,17 +285,33 @@ LST工作流：
 工具调用纪律：
 - 处理类工具一次调用处理一个日期的全部景，单景耗时2-6分钟，请耐心等待返回结果，不要因等待而重复调用（工具幂等，重复调用会自动跳过）
 - 工具返回error时，先对照场景发现工具的结果检查路径是否正确，修正后重试；同一工具连续失败3次则停止处理并向用户如实说明原因
-- 回答中优先引用工具返回的具体数字，简洁专业"""
+- 回答中优先引用工具返回的具体数字，简洁专业
+
+任务澄清规则（重要）：
+- 当用户任务涉及 LST 产品（lst_invert_date、lst_clip_date_to_aoi、calculate_lst_stats、compare_lst_dates、analyze_lst_ndvi），且用户没有明确说明"复用现成产品"还是"从反演开始重新生产"时，第一轮不要调用任何工具，先反问一次让用户选择：
+  "本地已有就绪的 LST 产品。请选择：A. 复用现成产品直接分析（快）；B. 从反演开始完整重新生产一遍（每景约 2-4 分钟）。"
+- 用户明确说了"复用已就绪产品/直接复用/严禁重跑"或"从反演开始/重新跑一遍"时，不反问，直接执行
+- 用户指定了具体文件路径时视为数据来源已明确，不反问
+- 用户选择 B 时，调用 lst_invert_date 和 lst_clip_date_to_aoi 都要传 force=true，确实重新执行反演与裁剪"""
 
 
 # ============================================================
 # 第三步：Tool Use 完整循环（与 ndvi_agent 同构）
 # ============================================================
-def run_agent(user_question: str, verbose: bool = True) -> str:
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_question},
-    ]
+def run_agent(user_question: str, verbose: bool = True, messages: list = None,
+              return_history: bool = False):
+    """执行一轮 Agent 对话。
+
+    传入 messages 时沿用历史（多轮对话：Agent 反问后用户继续回复），并在原地更新；
+    return_history=True 时返回 (answer, messages)，便于调用方继续下一轮。
+    """
+    if messages is None:
+        messages = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_question},
+        ]
+    else:
+        messages.append({"role": "user", "content": user_question})
 
     round_num = 0
     while True:
@@ -308,6 +333,10 @@ def run_agent(user_question: str, verbose: bool = True) -> str:
         if not msg.tool_calls:
             if verbose:
                 print("模型未调用工具，直接给出回复")
+            # 回复也记入历史（多轮对话时模型需要记得自己反问过什么）
+            messages.append(msg)
+            if return_history:
+                return msg.content, messages
             return msg.content
 
         # 把模型的 tool_call 请求加入对话历史

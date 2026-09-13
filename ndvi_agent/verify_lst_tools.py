@@ -66,8 +66,9 @@ def _fresh_stats(path):
 # ------------------------------------------------------------
 discovery = list_available_lst_scenes(DATA_DIR)
 check("V1.1 场景发现：dates 正确",
-      discovery["dates"] == [D1, D2], str(discovery["dates"]))
-check("V1.1 场景发现：每日期1景", discovery["total_scenes"] == 2
+      discovery["dates"] == ["20241231", "20250430", D1, D2],
+      str(discovery["dates"]))
+check("V1.1 场景发现：每日期1景", discovery["total_scenes"] == 4
       and all(len(v) == 1 for v in discovery["scenes_by_date"].values()))
 tars = {d: v[0] for d, v in discovery["scenes_by_date"].items()}
 

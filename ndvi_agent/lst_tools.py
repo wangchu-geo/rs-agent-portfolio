@@ -141,13 +141,15 @@ def list_available_lst_scenes(data_dir: str) -> dict:
 # ============================================================
 # 工具 2：LST 反演（旧脚本主流程的批量化）
 # ============================================================
-def lst_invert_date(scene_paths: list, output_dir: str, extract_dir: str = "") -> dict:
+def lst_invert_date(scene_paths: list, output_dir: str, extract_dir: str = "",
+                    force: bool = False) -> dict:
     """
     对某日期的一批 Landsat C2 L2SP tar 执行：解压 → ST_B10 线性换算（K→℃）
     → QA_PIXEL 启发式云掩膜，输出 Float32 地表温度产品 LST_<日期>.tif（nodata=NaN）。
 
     云掩膜口径与 6 月历史产品严格一致（qa<2 或 qa>22000 置 NaN）。
     单景约 2-4 分钟（首次含解压）；已存在的产品与解压目录自动跳过（幂等）。
+    force=True 时无视幂等短路，重新执行反演（覆盖旧产物）。
     """
     if not scene_paths:
         raise ValueError("scene_paths 为空：请传入 list_available_lst_scenes 返回的路径列表")
@@ -163,7 +165,7 @@ def lst_invert_date(scene_paths: list, output_dir: str, extract_dir: str = "") -
                             "error": f"文件不存在：{tar_path}"})
             continue
         try:
-            results.append(_invert_one_scene(tar_path, output_dir, extract_dir))
+            results.append(_invert_one_scene(tar_path, output_dir, extract_dir, force))
         except Exception as e:
             # per-scene 失败不炸整个批次（镜像 snap_preprocess_date 的模式）
             results.append({"scene": os.path.basename(tar_path), "status": "failed",
@@ -178,13 +180,14 @@ def lst_invert_date(scene_paths: list, output_dir: str, extract_dir: str = "") -
     })
 
 
-def _invert_one_scene(tar_path: str, output_dir: str, extract_dir: str) -> dict:
+def _invert_one_scene(tar_path: str, output_dir: str, extract_dir: str,
+                      force: bool = False) -> dict:
     scene_name = os.path.basename(tar_path)[:-4]   # 去 .tar
     date = _lst_tar_date(tar_path)
     out_path = os.path.join(output_dir, f"LST_{date}.tif")
 
-    # 幂等短路：产品已存在直接返回（Agent 纠错重试代价极小）
-    if os.path.isfile(out_path):
+    # 幂等短路：产品已存在直接返回（Agent 纠错重试代价极小）；force=True 时重跑
+    if os.path.isfile(out_path) and not force:
         return {"scene": scene_name, "date": date, "status": "exists",
                 "output": out_path}
 
@@ -276,11 +279,13 @@ def _invert_one_scene(tar_path: str, output_dir: str, extract_dir: str) -> dict:
 # ============================================================
 # 工具 3：按研究区裁剪（旧脚本缺失，本次补齐）
 # ============================================================
-def lst_clip_date_to_aoi(lst_tif: str, shp_path: str, output_dir: str) -> dict:
+def lst_clip_date_to_aoi(lst_tif: str, shp_path: str, output_dir: str,
+                         force: bool = False) -> dict:
     """
     用研究区矢量裁剪整景 LST 产品（与 NDVI 链共用同一矢量）。
     背景置 -9999（calculate_lst_stats 兼容该 nodata），
     矢量与栅格坐标系不一致时 gdal.Warp 自动重投影。
+    已存在的裁剪产品默认跳过（幂等）；force=True 时重新裁剪覆盖。
     """
     if not os.path.isfile(lst_tif):
         raise FileNotFoundError(f"找不到 LST 产品：{lst_tif}")
@@ -292,6 +297,20 @@ def lst_clip_date_to_aoi(lst_tif: str, shp_path: str, output_dir: str) -> dict:
 
     os.makedirs(output_dir, exist_ok=True)
     out_path = os.path.join(output_dir, f"LST_{date}_clip.tif")
+
+    # 幂等短路（force=True 时重跑）；读一次元数据，返回字段与完整裁剪一致
+    if os.path.isfile(out_path) and not force:
+        ds = gdal.Open(out_path)
+        gt = ds.GetGeoTransform()
+        w, h = ds.RasterXSize, ds.RasterYSize
+        xmin, ymax = gt[0], gt[3]
+        xmax, ymin = gt[0] + w * gt[1], gt[3] + h * gt[5]
+        crs = ds.GetProjection()
+        ds = None
+        return _json_safe({"clip_path": out_path, "status": "exists",
+                           "crs": crs, "width": w, "height": h,
+                           "transform": gt, "extent": [xmin, ymax, xmax, ymin],
+                           "nodata": NODATA_RAW})
 
     # 注意：GDAL 3.6 的 Python 绑定没有 config_options 上下文管理器，
     # 用 SetConfigOption + finally 恢复（与 pipeline_tools.clip_date_to_aoi 同写法）
